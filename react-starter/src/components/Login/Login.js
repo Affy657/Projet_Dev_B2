@@ -78,7 +78,7 @@ export default function Login({ setToken, onError, onRegister }) {
             type="submit"
             onClick={handlerSubmit}
             onSubmit={handlerSubmit}
-          >Submit</button>
+          >login</button>
           {loading && (
             <p>Connexion en cours...</p>
           )}
@@ -92,7 +92,6 @@ export default function Login({ setToken, onError, onRegister }) {
               >Register</button>
           </div>
         </label>
-        
       </form>
     </div>
   )

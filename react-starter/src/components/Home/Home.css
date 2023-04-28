@@ -1,0 +1,40 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .property-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  
+  .property {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 16px;
+  }
+  
+  .property img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .property h3 {
+    font-size: 1.5rem;
+    margin: 16px 0;
+  }
+  
+  .property p {
+    margin-bottom: 16px;
+  }
+  

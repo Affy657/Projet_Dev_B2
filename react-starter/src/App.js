@@ -72,6 +72,7 @@ function App() {
           <Register
             onRegister={handleRegister}
             onError={handlerError}
+            onBackToLogin={handleRegister}
           />
         )}
       </>

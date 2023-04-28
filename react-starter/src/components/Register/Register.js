@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import './Register.css';
 
-export default function Register({ onRegister, onError }) {
+export default function Register({ onRegister, onError, onBackToLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const passwordRef = useRef(null);
@@ -74,6 +74,13 @@ export default function Register({ onRegister, onError }) {
           </button>
           {loading && <p>Inscription en cours...</p>}
         </div>
+        <label>
+            <div>
+                <button type="button" onClick={onBackToLogin}>
+                    Login
+                </button>
+            </div>
+        </label>
       </form>
     </div>
   );
