@@ -7,6 +7,7 @@ function handler(db) {
     const collection = db.collection('users');
 
     route.post('/login', async (req, res) => {
+        console.log(req.body.username);
         if (!req.body.username) {
             return res.status(400).json({
                 error: 'Missing username'
@@ -25,7 +26,7 @@ function handler(db) {
             
         const password = hash.digest('base64');
 
-        const users = await collection.findOne({
+        const user = await collection.findOne({
             username: req.body.username,
             password: password
         }, {
@@ -34,13 +35,13 @@ function handler(db) {
             }
         });
 
-        if (!users) {
+        if (!user) {
             return res.status(400).json({
                 error: 'Bad password or username'
             })
         }
 
-        res.status(200).json({ users });
+        res.status(200).json({ user });
     });
 
     route.post('/register', async (req, res) => {
@@ -70,12 +71,17 @@ function handler(db) {
             
         const password = hash.digest('base64');
 
+        const hashToken = crypto.createHash('sha256');
+
+        hashToken.update('' + (process.pid + Date.now() + Math.random()));
+
+        const token = hashToken.digest('hex');
+
         const result = await collection.insertOne({
             username: req.body.username,
-            password
+            password,
+            token
         });
-
-        console.log(result);
 
         if (!result.acknowledged) {
             return res.status(500).json({

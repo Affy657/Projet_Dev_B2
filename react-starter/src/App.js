@@ -1,31 +1,86 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from '../src/components/Dashboard/Dashboard';
 import Preferences from '../src/components/Preferences/Preferences';
-import Login from '../src/components/Login/Login.js';
+import Home from '../src/components/Home/Home.js';
+import Login from './components/login/login.js';
+import Register from '../src/components/Register/Register.js';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  //Route,
+  //Link,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "preferences",
+    element: <Preferences />,
+  },
+]);
 
 function App() {
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(null);
+  const [loginError, setLoginError] = useState(null);
+  const [registering, setRegistering] = useState(false);
+
+  function handlerError(error) {
+    console.log('app.js', error);
+    setLoginError(error);
+  }
+
+  function handleToken(token) {
+    localStorage.setItem('token', token);
+    console.log('Token saved : %s', token);
+    setToken(token)
+  }
+
+  function handleRegister() {
+    setRegistering(!registering);
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token || token == '') {
+      setToken(null);
+      return;
+    }
+
+    setToken(token);
+  }, []);
 
   if(!token) {
-    return <Login setToken={setToken} />
+    return (
+      <>
+        {loginError && (<h1 style={{color: 'red'}}>{loginError}</h1>)}
+        {!registering ? (
+          <Login
+            setToken={handleToken}
+            onError={handlerError}
+            onRegister={handleRegister}
+          />
+        ) : (
+          <Register
+            onRegister={handleRegister}
+            onError={handlerError}
+          />
+        )}
+      </>
+    )
   }
+
   return (
-      <div className="wrapper">
-        <h1>Application</h1>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/dashboard'>
-              <Dashboard />
-            </Route>
-            <Route path='/preferences'>
-              <Preferences />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
-    );
+    <RouterProvider router={router} />
+  );
 }
 
 export default App;

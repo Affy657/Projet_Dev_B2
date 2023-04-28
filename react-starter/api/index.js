@@ -2,6 +2,7 @@ require('dotenv').config();
 const http = require('http');
 const express = require('express');
 const {MongoClient} = require('mongodb');
+const cors = require('cors');
 
 // Routes
 const auth = require('./routes/auth.js');
@@ -16,7 +17,9 @@ const db = client.db('sample_airbnb');
 
 app.use(express.json({
     extended: true
-}))
+}));
+
+app.use(cors());
 
 app.use('/auth', auth(db));
 
