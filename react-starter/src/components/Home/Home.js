@@ -21,6 +21,11 @@ export default function Home() {
   const [limit, setLimit] = useState(20);
   const [skip, setSkip] = useState(0);
 
+  function handleLogout() {
+    localStorage.removeItem('token');
+    window.location.reload();
+  }
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/offert", {
@@ -43,6 +48,9 @@ export default function Home() {
           <Property key={property._id} property={property} />
         ))}
       </div>
+        <button className="logout-button" onClick={handleLogout}>
+        Déconnexion
+        </button>
       <Footer />
     </div>
   );

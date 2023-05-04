@@ -42,7 +42,7 @@ function App() {
     console.log('Token saved : %s', token);
     setToken(token)
   }
-
+  
   function handleRegister() {
     setRegistering(!registering);
   }
