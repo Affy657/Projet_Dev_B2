@@ -21,10 +21,28 @@ export default function Home() {
   const [properties, setProperties] = useState([]);
   const [limit, setLimit] = useState(20);
   const [skip, setSkip] = useState(0);
+  const [loading, setLoading] = useState(false); 
 
   function handleLogout() {
     localStorage.removeItem('token');
     window.location.reload();
+  }
+
+  function loadMoreProperties() {
+    setLoading(true);
+    axios
+      .get("http://localhost:3001/offert", {
+        params: { limit, skip: skip + limit }
+      })
+      .then((response) => {
+        setProperties((prevProperties) => [...prevProperties, ...response.data]);
+        setSkip((prevSkip) => prevSkip + limit);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching more properties:", error);
+        setLoading(false);
+      });
   }
 
   useEffect(() => {
@@ -49,6 +67,10 @@ export default function Home() {
           <Property key={property._id} property={property} />
         ))}
       </div>
+      {loading && <div className="loading-indicator">Chargement...</div>}
+      <button className="load-more-button" onClick={loadMoreProperties}>
+        Charger plus d'offres
+        </button>
         <button className="logout-button" onClick={handleLogout}>
         Déconnexion
         </button>
