@@ -17,7 +17,7 @@ function Property({ property }) {
 }
 
 
-export default function Home() {
+export default function Home({ handleLogout }) {
   const [properties, setProperties] = useState([]);
   const [limit, setLimit] = useState(20);
   const [skip, setSkip] = useState(0);
@@ -60,7 +60,7 @@ export default function Home() {
 
   return (
     <div className="home">
-        <Navbar /> 
+        <Navbar handleLogout={handleLogout} />
       <h1>Tema le site</h1>
       <div className="property-list">
         {properties.map((property) => (
