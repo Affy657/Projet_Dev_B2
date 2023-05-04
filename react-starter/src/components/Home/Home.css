@@ -52,4 +52,13 @@
     cursor: pointer;
     border-radius: 4px;
   }
+
+  .property-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
   

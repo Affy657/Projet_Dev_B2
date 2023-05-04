@@ -9,12 +9,13 @@ function Property({ property }) {
     <div className="property">
       <img src={property.images.picture_url} alt={property.name} />
       <h3>{property.name}</h3>
-      <p>{property.description}</p>
+      <p className="property-description">{property.description}</p>
       <p>Prix : {property.price.$numberDecimal}€ / nuit</p>
       <button>View Details</button>
     </div>
   );
 }
+
 
 export default function Home() {
   const [properties, setProperties] = useState([]);
