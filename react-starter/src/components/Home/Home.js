@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import "./Home.css";
+import Footer from "../Footer/Footer";
 
 function Property({ property }) {
   return (
     <div className="property">
-      <img src={property.imageUrl} alt={property.title} />
-      <h3>{property.title}</h3>
+      <img src={property.images.picture_url} alt={property.name} />
+      <h3>{property.name}</h3>
       <p>{property.description}</p>
-      <p>Prix : {property.price}€ / nuit</p>
+      <p>Prix : {property.price.$numberDecimal}€ / nuit</p>
       <button>View Details</button>
     </div>
   );
@@ -17,10 +18,14 @@ function Property({ property }) {
 
 export default function Home() {
   const [properties, setProperties] = useState([]);
+  const [limit, setLimit] = useState(20);
+  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/properties") // remplacer ca par l'api
+      .get("http://localhost:3001/offert", {
+        params: { limit, skip }
+      }) 
       .then((response) => {
         setProperties(response.data);
       })
@@ -38,6 +43,7 @@ export default function Home() {
           <Property key={property._id} property={property} />
         ))}
       </div>
+      <Footer />
     </div>
   );
 }

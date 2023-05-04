@@ -6,6 +6,7 @@ const cors = require('cors');
 
 // Routes
 const auth = require('./routes/auth.js');
+const offert = require('./routes/offert.js');
 
 const PORT = process.env.PORT || '3001';
 
@@ -22,6 +23,7 @@ app.use(express.json({
 app.use(cors());
 
 app.use('/auth', auth(db));
+app.use('/offert', offert(db));
 
 app.get('/', (req, res) => {
     res.status(200).json({
