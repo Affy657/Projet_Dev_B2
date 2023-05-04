@@ -31,7 +31,7 @@ function Footer() {
                 </div>
             </div>
             <div className="footer__copyright">
-                &copy; {new Date().getFullYear()} Airbnb Clone. Tous droits réservés.
+                &copy; {new Date().getFullYear()} React Airbnb. Tous droits réservés.
             </div>
         </footer>
     );
