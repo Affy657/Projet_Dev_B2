@@ -55,33 +55,34 @@ export default function Register({ onRegister, onError, onBackToLogin }) {
         passwordRef.current.value = '';
       });
   }
-
-  return (
-    <div className="register-wrapper">
-      <h1>Create Account</h1>
-      <form>
-        <label>
-          <p>Username</p>
-          <input type="text" onChange={usernameHandler} />
-        </label>
-        <label>
-          <p>Password</p>
-          <input ref={passwordRef} type="password" onChange={passwordHandler} />
-        </label>
-        <div>
-          <button type="submit" onClick={handlerSubmit} onSubmit={handlerSubmit}>
-            Register
-          </button>
-          {loading && <p>Inscription en cours...</p>}
-        </div>
-        <label>
+    return (
+      <div className="register-wrapper">
+        <form className="register-form">
+          <h1>Create Account</h1>
+          <label className="register-label">
+            <p>Username</p>
+            <input className="register-input" type="text" onChange={usernameHandler} />
+          </label>
+          <label className="register-label">
+            <p>Password</p>
+            <input className="register-input" ref={passwordRef} type="password" onChange={passwordHandler} />
+          </label>
+          <div>
+            <button className="register-button" type="submit" onClick={handlerSubmit} onSubmit={handlerSubmit}>
+              Register
+            </button>
+            {loading && (
+              <p>Inscription en cours...</p>
+            )}
+          </div>
+          <label>
             <div>
-                <button type="button" onClick={onBackToLogin}>
-                    Login
-                </button>
+              <button className="login-button" type="button" onClick={onBackToLogin}>
+                Login
+              </button>
             </div>
-        </label>
-      </form>
-    </div>
-  );
-}
+          </label>
+        </form>
+      </div>
+    );
+  }

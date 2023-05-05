@@ -54,45 +54,34 @@ export default function Login({ setToken, onError, onRegister }) {
     })
   }
 
-  return(
+  return (
     <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form>
-        <label>
+      <form className="login-form">
+        <h1>Please Log In</h1>
+        <label className="login-label">
           <p>Username</p>
-          <input
-            type="text"
-            onChange={usernameHandler}
-          />
+          <input className="login-input" type="text" onChange={usernameHandler} />
         </label>
-        <label>
+        <label className="login-label">
           <p>Password</p>
-          <input
-            ref={passwordRef}
-            type="password"
-            onChange={passwordHandler}
-          />
+          <input className="login-input" ref={passwordRef} type="password" onChange={passwordHandler} />
         </label>
-        <div>
-          <button
-            type="submit"
-            onClick={handlerSubmit}
-            onSubmit={handlerSubmit}
-          >login</button>
+        <div className="button-container">
+          <button className="login-button" type="submit" onClick={handlerSubmit} onSubmit={handlerSubmit}>
+            login
+          </button>
           {loading && (
             <p>Connexion en cours...</p>
           )}
-          
         </div>
-          <label>
-            <div>
-              <button 
-                type="button" 
-                onClick={onRegister}
-              >Register</button>
+        <label>
+          <div>
+            <button className="register-button" type="button" onClick={onRegister}>
+              Register
+            </button>
           </div>
         </label>
       </form>
     </div>
-  )
+  );
 }
