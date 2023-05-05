@@ -6,6 +6,7 @@ import Home from '../src/components/Home/Home.js';
 import Login from './components/login/login.js';
 import Register from '../src/components/Register/Register.js';
 import PropertyDetails from './components/PropertyDetails/PropertyDetails';
+import AddOffer from './components/AddOffer/AddOffer';
 
 import {
   createBrowserRouter,
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "property/:propertyId",
     element: <PropertyDetails />,
+  },
+  {
+    path: "/add-offer",
+    element: <AddOffer />,
   },
 ]);
 

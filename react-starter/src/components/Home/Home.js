@@ -13,7 +13,7 @@ function Property({ property }) {
       <img src={property.images.picture_url} alt={property.name} />
       <h3>{property.name}</h3>
       <p className="property-description">{property.description}</p>
-      <p>{Math.floor(property.price.$numberDecimal)} € par nuit</p>
+      <p> {Math.floor(property.price.$numberDecimal)} € par nuit</p>
     </div>
   );
 }
