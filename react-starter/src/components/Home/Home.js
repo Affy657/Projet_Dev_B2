@@ -3,6 +3,9 @@ import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import "./Home.css";
 import Footer from "../Footer/Footer";
+import { Link } from "react-router-dom";
+
+
 
 function Property({ property }) {
   return (
@@ -10,8 +13,7 @@ function Property({ property }) {
       <img src={property.images.picture_url} alt={property.name} />
       <h3>{property.name}</h3>
       <p className="property-description">{property.description}</p>
-      <p>Prix : {property.price.$numberDecimal}€ / nuit</p>
-      <button>View Details</button>
+      <p>{Math.floor(property.price.$numberDecimal)} € par nuit</p>
     </div>
   );
 }
@@ -64,15 +66,14 @@ export default function Home({ handleLogout }) {
       <h1>Tema le site</h1>
       <div className="property-list">
         {properties.map((property) => (
-          <Property key={property._id} property={property} />
+          <Link to={`/property/${property.id}`} key={property.id}>            
+            <Property key={property._id} property={property} />  
+          </Link>
         ))}
       </div>
       {loading && <div className="loading-indicator">Chargement...</div>}
       <button className="load-more-button" onClick={loadMoreProperties}>
         Charger plus d'offres
-        </button>
-        <button className="logout-button" onClick={handleLogout}>
-        Déconnexion
         </button>
       <Footer />
     </div>

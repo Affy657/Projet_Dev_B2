@@ -3,12 +3,13 @@
     justify-content: space-between;
     align-items: center;
     background-color: #333;
-    padding: 8px 16px;
+    padding: 8px;
     color: #fff;
     width: 100%;
   }
   
   .logo {
+    margin-left: 15px;
     font-size: 1.5rem;
   }
   
@@ -26,6 +27,7 @@
   }
   
   .profile-icon {
+    margin-right: 15p;
     font-size: 1.2rem;
   }
 

@@ -5,6 +5,8 @@ import Preferences from '../src/components/Preferences/Preferences';
 import Home from '../src/components/Home/Home.js';
 import Login from './components/login/login.js';
 import Register from '../src/components/Register/Register.js';
+import PropertyDetails from './components/PropertyDetails/PropertyDetails';
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "preferences",
     element: <Preferences />,
+  },
+  {
+    path: "property/:propertyId",
+    element: <PropertyDetails />,
   },
 ]);
 

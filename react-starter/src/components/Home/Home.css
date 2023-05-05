@@ -9,8 +9,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
-    margin-top: 32px;
+    gap: 18px;
+    margin-top: 35px;
   }
   
   .property {
@@ -25,18 +25,19 @@
   }
   
   .property img {
+    border-radius: 5px;
     width: 100%;
     height: 200px;
     object-fit: cover;
   }
   
   .property h3 {
-    font-size: 1.5rem;
-    margin: 16px 0;
+    font-size: 1.3rem;
+    margin: 10px 0;
   }
   
   .property p {
-    margin-bottom: 16px;
+    margin-bottom: 5px;
   }
   
   .logout-button {
@@ -72,16 +73,23 @@
     color: #ffffff;
     border: none;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px; 
+    margin-bottom: 20px;
   }
   
   .load-more-button:hover {
     background-color: #ff3d48;
   }
+
+  .property-list a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
   
   
   
