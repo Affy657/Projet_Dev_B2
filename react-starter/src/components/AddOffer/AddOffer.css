@@ -1,71 +1,97 @@
-.add-offer-wrapper {
+.add-offer {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #ffffff;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 70px;
+  }
+  
+  .add-offer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .add-offer-form-container,
+  .offers-list {
+    flex-basis: 45%;
+    background-color: #ffffff;
+    border: 1px solid #ebebeb;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .offers-list {
+    flex: 1;
+    max-width: 300px;
+    padding-right: 20px;
+  }
+  
+  
+  .add-offer-form-container h2,
+  .offers-list h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #222222;
+    margin-bottom: 20px;
+    text-align: center;
   }
   
   .add-offer-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #ffffff;
-    border: 1px solid #ebebeb;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 450px;
-    width: 100%;
+    gap: 20px;
   }
   
-  .add-offer-form h1 {
-    font-size: 28px;
+  .add-offer-label {
     font-weight: bold;
-    color: #222222;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  
-  .add-offer-label p {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
     color: #484848;
-    margin-bottom: 5px;
   }
   
   .add-offer-input {
-    justify-content: center;
+    padding: 12px;
+    font-size: 1rem;
     border: 1px solid #ebebeb;
     border-radius: 4px;
-    height: 40px;
-    padding: 0 25px;
-    font-size: 16px;
-    color: #484848;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-  
-  .add-offer-input[type="url"],
-  .add-offer-input[type="number"] {
     width: 100%;
   }
   
   .add-offer-button {
-    margin-top: 25px;
-    width: 70%;
-    background-color: #ff5a5f;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 600;
+    background-color: #FF385C;
+    color: #fff;
     border: none;
-    border-radius: 5px;
-    height: 40px;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    width: 100%;
   }
   
   .add-offer-button:hover {
-    background-color: #ff7d82;
+    background-color: #FF5A75;
   }
+  
+  .offers-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .offers-list li {
+    cursor: pointer;
+    padding: 8px;
+    background-color: #f7f7f7;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #484848;
+  }
+  
+  .offers-list li:hover {
+    background-color: #e0e0e0;
+  }
+
+  
   

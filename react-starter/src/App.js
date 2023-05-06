@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Dashboard from '../src/components/Dashboard/Dashboard';
-import Preferences from '../src/components/Preferences/Preferences';
 import Home from '../src/components/Home/Home.js';
 import Login from './components/login/login.js';
 import Register from '../src/components/Register/Register.js';
@@ -19,14 +17,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-  },
-  {
-    path: "dashboard",
-    element: <Dashboard />,
-  },
-  {
-    path: "preferences",
-    element: <Preferences />,
   },
   {
     path: "property/:propertyId",

@@ -1,91 +1,61 @@
-
-import React, { useState } from 'react';
-import './AddOffer.css';
+import React, { useState } from "react";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+import "./AddOffer.css";
 
 function AddOffer() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [pricePerNight, setPricePerNight] = useState('');
-  const [address, setAddress] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [offers, setOffers] = useState([]);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    // TODO: Envoyer les données à votre API ou votre base de données
-
-    console.log({
-      title,
-      description,
-      pricePerNight,
-      address,
-      imageUrl,
-    });
-
-    setTitle('');
-    setDescription('');
-    setPricePerNight('');
-    setAddress('');
-    setImageUrl('');
+  function handleSubmit(e) {
+    e.preventDefault();
+    const newOffer = {
+      title: e.target.title.value,
+      description: e.target.description.value,
+      price: e.target.price.value,
+      address: e.target.address.value,
+      imageURL: e.target.imageURL.value,
+    };
+    setOffers([...offers, newOffer]);
   }
 
   return (
-    <div className="add-offer-wrapper">
-      <form className="add-offer-form" onSubmit={handleSubmit}>
-        <h1>Ajouter une offre</h1>
-        <label className="add-offer-label">
-          <p>Titre</p>
-          <input
-            className="add-offer-input"
-            type="text"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            required
-          />
-        </label>
-        <label className="add-offer-label">
-          <p>Description</p>
-          <textarea
-            className="add-offer-input"
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-            required
-          />
-        </label>
-        <label className="add-offer-label">
-          <p>Adresse</p>
-          <input
-            className="add-offer-input"
-            type="text"
-            value={address}
-            onChange={(event) => setAddress(event.target.value)}
-            required
-          />
-        </label>
-        <label className="add-offer-label">
-          <p>URL de l'image</p>
-          <input
-            className="add-offer-input"
-            type="url"
-            value={imageUrl}
-            onChange={(event) => setImageUrl(event.target.value)}
-            required
-          />
-        </label>
-        <label className="add-offer-label">
-          <p>Prix par nuit (€)</p>
-          <input
-            className="add-offer-input"
-            type="number"
-            value={pricePerNight}
-            onChange={(event) => setPricePerNight(event.target.value)}
-            required
-          />
-        </label>
-        <button className="add-offer-button" type="submit">
-          Ajouter l'offre
-        </button>
-      </form>
+    <div className="add-offer">
+      <Navbar />
+      <div className="add-offer-content">
+        <div className="offers-list">
+          <h2>Mes offres</h2>
+          {offers.length === 0 ? (
+            <p>Vous n'avez pas encore d'offres.</p>
+          ) : (
+            <ul>
+              {offers.map((offer, index) => (
+                <li key={index}>
+                  {offer.title} - {offer.price}€
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div className="add-offer-form-container">
+          <h2>Ajouter une offre</h2>
+          <form onSubmit={handleSubmit} className="add-offer-form">
+            <label className="add-offer-label">Titre :</label>
+            <input type="text" name="title" className="add-offer-input" />
+            <label className="add-offer-label">Description :</label>
+            <input type="text" name="description" className="add-offer-input" />
+            <label className="add-offer-label">Prix par nuit :</label>
+            <input type="number" name="price" className="add-offer-input" />
+            <label className="add-offer-label">Adresse :</label>
+            <input type="text" name="address" className="add-offer-input" />
+            <label className="add-offer-label">URL de l'image :</label>
+            <input type="text" name="imageURL" className="add-offer-input" />
+            <button type="submit" className="add-offer-button">
+              Ajouter l'offre
+            </button>
+          </form>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

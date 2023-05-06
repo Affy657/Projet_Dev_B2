@@ -62,8 +62,7 @@ export default function Home({ handleLogout }) {
 
   return (
     <div className="home">
-        <Navbar handleLogout={handleLogout} />
-      <h1>Tema le site</h1>
+      <Navbar handleLogout={handleLogout} />
       <div className="property-list">
         {properties.map((property) => (
           <Link to={`/property/${property.id}`} key={property.id}>            
