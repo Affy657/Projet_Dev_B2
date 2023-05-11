@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import './App.css';
 import Home from '../src/components/Home/Home.js';
 import Login from './components/login/login.js';
 import Register from '../src/components/Register/Register.js';
 import PropertyDetails from './components/PropertyDetails/PropertyDetails';
 import AddOffer from './components/AddOffer/AddOffer';
+import Booking from './components/booking/booking';
+import { differedDate } from './utils';
+import { filterReducer, FilterContext, FilterDispatchContext } from './lib/filterContext';
 
 import {
   createBrowserRouter,
@@ -19,12 +22,16 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "property/:propertyId",
+    path: "offert/:propertyId",
     element: <PropertyDetails />,
   },
   {
     path: "/add-offer",
     element: <AddOffer />,
+  },
+  {
+    path: "/booking",
+    element: <Booking />,
   },
 ]);
 
@@ -32,6 +39,12 @@ function App() {
   const [token, setToken] = useState(null);
   const [loginError, setLoginError] = useState(null);
   const [registering, setRegistering] = useState(false);
+  const [filterParams, filterParamsDispatch] = useReducer(filterReducer, {
+    checkIn: differedDate(1).toDateString(),
+    checkOut: differedDate(8).toDateString(),
+    guests: 1,
+    query: ''
+  })
 
   function handlerError(error) {
     console.log('app.js', error);
@@ -51,7 +64,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    if (!token || token == '') {
+    if (!token || token === '') {
       setToken(null);
       return;
     }
@@ -81,7 +94,13 @@ function App() {
   }
 
   return (
-    <RouterProvider router={router} />
+    <>
+      <FilterContext.Provider value={filterParams}>
+        <FilterDispatchContext.Provider value={filterParamsDispatch}>
+          <RouterProvider router={router} />
+        </FilterDispatchContext.Provider>
+      </FilterContext.Provider>
+    </>
   );
 }
 

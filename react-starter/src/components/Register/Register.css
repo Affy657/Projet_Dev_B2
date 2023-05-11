@@ -34,19 +34,19 @@
   }
   
   .register-input {
-    border: 1px solid #ebebeb;
+    border: 1px solid #ebebeb!important;
     border-radius: 4px;
-    height: 40px;
-    padding: 0 12px;
+    height: 40px!important;
+    padding: 0 12px!important;
     font-size: 16px;
     color: #484848;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
   
   .register-button,
   .login-button {
-    width: 100%;
-    background-color: #ff5a5f;
+    width: 100px;
+    background-color: var(--main-color);
     color: #ffffff;
     font-size: 15px;
     font-weight: 600;
@@ -59,7 +59,7 @@
   
   .register-button:hover,
   .login-button:hover {
-    background-color: #ff7d82;
+    background-color: var(--main-color);
   }
   
   .register-button[type="submit"] {

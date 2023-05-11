@@ -1,0 +1,64 @@
+
+.property-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  .property-details-loading{
+    text-align: center;
+    margin-top: 150px ;
+    margin-bottom: 100px;
+    font-size: 1.5em;
+  }
+  .property-details-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px;
+    text-align: center;
+  }
+  
+  .property-details-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .property-details-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 32px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+  
+  .property-details-description {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  
+  .property-details-price {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  
+  .property-details-book {
+    background-color: var(--main-color);
+    color: #ffffff;
+    font-size: 18px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .property-details-book:hover {
+    background-color: #ff7d82;
+  }
+  

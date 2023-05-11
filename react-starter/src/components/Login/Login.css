@@ -34,22 +34,22 @@
   }
   
   .login-input {
-    border: 1px solid #ebebeb;
+    border: 1px solid #ebebeb !important;
     border-radius: 4px;
     height: 40px;
-    padding: 0 12px;
+    padding: 0 12px !important;
     font-size: 16px;
     color: #484848;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
   
   .login-button,
   .register-button {
-    width: 100%;
-    background-color: #ff5a5f;
+    width: 100px ;
+    background-color: var(--main-color);
     color: #ffffff;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 15px ;
+    font-weight: 300;
     border: none;
     border-radius: 5px;
     height: 40px;
