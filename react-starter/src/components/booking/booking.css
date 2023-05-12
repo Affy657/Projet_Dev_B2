@@ -11,7 +11,7 @@
   }
   
   .booking-list {
-    margin-top: 20px;
+    margin-top: 100px;
     list-style-type: none;
     padding: 0;
     padding: 0 2rem;
@@ -31,6 +31,17 @@
   
   .booking-info {
     flex-grow: 1;
+  }
+
+  .booking-info h2 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .booking-info h2 span {
+    color: gray;
+    font-size: smaller;
   }
   
   .cancel-button {

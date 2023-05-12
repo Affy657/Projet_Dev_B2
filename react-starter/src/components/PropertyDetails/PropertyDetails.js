@@ -64,7 +64,6 @@ function PropertyDetails() {
     return <div className="property-details-not-found">Offre non trouvée.</div>;
   }
 
-
 return (
   <div className="property-details">
     <Navbar />

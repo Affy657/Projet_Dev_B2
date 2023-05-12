@@ -36,7 +36,7 @@ function handler(db) {
             limit: parseInt(req.query.limit)
         }
 
-        if (req.query.reviews != 'true') {
+        if (req.query.reviews !== 'true') {
             opts.projection = {
                 reviews: 0
             }
@@ -61,27 +61,21 @@ function handler(db) {
             }
         }
 
-        const offerts = await collection.find(filter, opts).toArray();
-
-        const availableOfferts = [];
-
-        for (const offert of offerts) {
-            const counts = await bookCollection.countDocuments({
-                check_in: { $lt: checkOut },
-                check_out: { $gt: checkIn },
+        const offerts = await collection.find(filter, opts).map(async (offert) => {
+            const count = await bookCollection.countDocuments({
+                check_in: { $lte: checkOut },
+                check_out: { $gte: checkIn },
                 offert_id: offert._id
             });
 
-            if (counts > 0) continue;
+            console.log(count, offert.name, offert._id);
 
-            availableOfferts.push(offert);
-        }
+            offert.isAvailable = count < 1;
 
-        if (availableOfferts.length < 1) {
-            return res.status(404).json({ error: 'not found' });
-        }
+            return offert;
+        }).toArray()
 
-        res.status(200).json(availableOfferts);
+        res.status(200).json(offerts.filter((offert) => offert.isAvailable));
     });
 
     route.get('/booking', async (req, res) => {
@@ -247,8 +241,8 @@ function handler(db) {
         const checkOut = new Date(req.body.checkOut).toDateString();
 
         const count = await bookCollection.countDocuments({
-            check_in: { $lt: checkOut },
-            check_out: { $gt: checkIn },
+            check_in: { $lte: checkOut },
+            check_out: { $gte: checkIn },
             offert_id: offert._id
         });
 
