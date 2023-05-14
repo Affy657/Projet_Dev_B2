@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Projet Dev B2 Ynov React Airbnb
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ce projet est une application web de réservation de logements. Les utilisateurs peuvent rechercher des offres en fonction de leurs critères, consulter les détails des offres, réserver des offres et annuler leurs réservations.
 
-## Available Scripts
+## Fonctionnalités
 
-In the project directory, you can run:
+- Inscription et connexion des utilisateurs.
+- Recherche d’hébergement par date de séjour, nombre de personnes, etc…
+- Affichage des résultats de recherche filtrés de manière ergonomique
+- Système de réservation en fonction de la disponibilité d’un hébergement en temps réel
+- Gestion des réservations pour les utilisateurs, et les hébergements
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Utilisation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Pour être sûr de rechercher des lieux qui sont dans la base de données, vous pouvez utiliser ces exemples :
+- Portugal 
+- Canada
+- Spain
+- United States
+- Brazil
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Pour installer et exécuter le projet, suivez les étapes ci-dessous :
 
-### `npm run build`
+1. Clonez le dépôt :
+```bash
+git clone https://github.com/Affy657/projet_dev_b2.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Accédez au dossier du projet :
+```bash
+cd react-starter/
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Installez les dépendances :
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Lancez le projet en mode développement :
+```bash
+npm start
+```
 
-### `npm run eject`
+5. Sur un autre terminal avec le même path lancer
+```bash
+npm run start:api
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Le projet sera accessible à l'adresse `http://localhost:3000`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+L'api sera accessible à l'address `http://localhost:3001`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Technologies utilisées
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Ce projet utilise les technologies et bibliothèques suivantes :
 
-## Learn More
+- [React](https://reactjs.org/) : Une bibliothèque JavaScript pour créer des interfaces utilisateur.
+- [React Router DOM](https://reactrouter.com/web/guides/quick-start) : Une bibliothèque de gestion des routes pour les applications React.
+- [Axios](https://axios-http.com/) : Une bibliothèque pour les requêtes HTTP basée sur les Promesses.
+- [Express](https://expressjs.com/) : Un framework Node.js pour construire des applications web et API.
+- [MongoDB](https://www.mongodb.com/) : Une base de données NoSQL orientée documents.
+- [Date-fns](https://date-fns.org/) : Une bibliothèque moderne pour manipuler les dates en JavaScript.
+- [Dotenv](https://www.npmjs.com/package/dotenv) : Un module pour charger les variables d'environnement à partir d'un fichier `.env`.
+- [React Day Picker](http://react-day-picker.js.org/) : Un calendrier de sélection de dates flexible et entièrement personnalisable pour React.
+- [SWR](https://swr.vercel.app/) : Une bibliothèque pour la récupération de données et la gestion du cache dans les applications React.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Auteur
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Votre nom - adrien.morand63@gmail.com
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+N'hésitez pas à me contacter pour toute question ou suggestion concernant ce projet.
