@@ -9,7 +9,7 @@ Ce projet est une application web de réservation de logements. Les utilisateurs
 - Affichage des résultats de recherche filtrés de manière ergonomique
 - Système de réservation en fonction de la disponibilité d’un hébergement en temps réel
 - Gestion des réservations pour les utilisateurs, et les hébergements
-- Gestion des utilisateurs
+
 
 ## Utilisation
 
@@ -44,7 +44,14 @@ npm install
 npm start
 ```
 
-Le projet sera accessible à l'adresse `http://localhost:3000`.
+5. Sur un autre terminal avec le même path lancer
+```bash
+npm run start:api
+```
+
+Le projet sera accessible à l'adresse `http://localhost:3000`
+
+L'api sera accessible à l'address `http://localhost:3001`
 
 ## Technologies utilisées
 
