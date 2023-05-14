@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, useContext } from 'react';
-import './SearchBar.css';
 import axios from 'axios';
 import useSWR from 'swr';
-import { format } from 'date-fns';
+import { differedDate } from '../../../utils';
 import { DayPicker } from 'react-day-picker';
-import { differedDate } from '../../../utils.js';
-import { FilterContext, FilterDispatchContext } from '../../../lib/filterContext';
+import { fr } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
+import './SearchBar.css';
+import { FilterContext, FilterDispatchContext } from '../../../lib/filterContext';
 
 const SearchBar = () => {
   const filter = useContext(FilterContext);
@@ -16,6 +16,7 @@ const SearchBar = () => {
   const [checkOut, setCheckOut] = useState(new Date(filter.checkOut));
   const [guests, setGuests] = useState(filter.guests);
   const [locationSuggestionIsOpen, setLocationSuggestionIsOpen] = useState(false);
+  const [rangeDateIsOpen, setRangeDateIsOpen] = useState(false);
   const [displayMessage, setDisplayMessage] = useState('');
   const checkInRef = useRef();
   const locationInputRef = useRef();
@@ -33,16 +34,13 @@ const SearchBar = () => {
   const handleOpenLocationSuggestion = (e) => {
     e.preventDefault();
     setLocationSuggestionIsOpen(true);
+    setRangeDateIsOpen(false);
     locationInputRef.current?.focus();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const filterNew = { checkIn, checkOut, guests };
-
-    if (searchTerm !== '') {
-      filterNew.query = searchTerm;
-    }
+    const filterNew = { checkIn, checkOut, guests, query: searchTerm };
 
     filterDispatch(filterNew)
   };
@@ -62,10 +60,25 @@ const SearchBar = () => {
       setGuests(guests - 1);
     }
   };
+
+  const handleMouseLeaveForm = () => {
+    setRangeDateIsOpen(false);
+    setLocationSuggestionIsOpen(false);
+  }
+
+  const handleClickDate = () => {
+    setRangeDateIsOpen(true);
+    setLocationSuggestionIsOpen(false);
+  }
   
+const handleDateChange = (range) => {
+  setCheckIn(range?.from || differedDate(1));
+  setCheckOut((range?.to ?? range?.from) ?? differedDate(8));
+}
+
   return (
     <>
-      <form className="bar" onSubmit={handleSubmit}>
+      <form className="bar" onSubmit={handleSubmit} onMouseLeave={handleMouseLeaveForm}>
         <div className="location">
           <p>Destination</p>
           <input
@@ -89,7 +102,11 @@ const SearchBar = () => {
             ref={checkInRef}
             value={checkIn.toLocaleDateString('fr-fr', { year: 'numeric', month: 'numeric', day: 'numeric' })}
             onChange={(e) => setCheckIn(e.target.value)}
+            onClick={handleClickDate}
           />
+          {rangeDateIsOpen && (
+            <RangeDatePicker checkIn={checkIn} checkOut={checkOut} onDateChange={handleDateChange} />
+          )}
         </div>
         <div className="check-out">
           <p>Départ</p>
@@ -98,6 +115,7 @@ const SearchBar = () => {
             placeholder="Quand ?"
             value={checkOut.toLocaleDateString('fr-fr', { year: 'numeric', month: 'numeric', day: 'numeric' })}
             onChange={(e) => setCheckOut(e.target.value)}
+            onClick={handleClickDate}
           />
         </div>
         <div className="guests">
@@ -127,7 +145,7 @@ const SearchBar = () => {
            >
             search
           </button>
-        </div>  
+        </div>
       </form>
     </>
   );
@@ -135,7 +153,7 @@ const SearchBar = () => {
 
 const fetcher = ([url, query, limit]) => axios.get(url, { params: { query, limit }}).then((res) => res.data);
 
-const Suggestion = function Suggestion({ query, onSuggestionClick }) {
+function Suggestion({ query, onSuggestionClick }) {
   const { data, error, isLoading } = useSWR(
     ['http://localhost:3001/offert/suggestion', query, 5],
     fetcher
@@ -147,7 +165,7 @@ const Suggestion = function Suggestion({ query, onSuggestionClick }) {
 
   if (isLoading) {
     return <div className="suggestion-dropdown">
-      <h4>Loading...</h4>;
+      <h4>Loading...</h4>
       </div>
   }
 
@@ -157,16 +175,17 @@ const Suggestion = function Suggestion({ query, onSuggestionClick }) {
     </div>
   }
 
-  console.log(data, error, isLoading);
-
   return (
     <>
       {data.length > 0 && (
         <div className="suggestion-dropdown">
-          {data.map((suggestion) => (
-            <div key={suggestion} onClick={() => onSuggestionClick(suggestion)}>
-              {suggestion}
-            </div>
+          {data.map((suggestion, i) => (
+            <>
+              {i !== 0 && <hr />}
+              <div key={suggestion} onClick={() => onSuggestionClick(suggestion)}>
+                {suggestion}
+              </div>
+            </>
           ))}
         </div>
       )}
@@ -174,5 +193,27 @@ const Suggestion = function Suggestion({ query, onSuggestionClick }) {
   );
   
 };
+
+function RangeDatePicker({ checkIn, checkOut, onDateChange }) {
+  const range = {
+    from: checkIn,
+    to: checkOut
+  };
+    
+  return (
+    <div className="check-in-dropdown">
+      <DayPicker
+        locale={fr}
+        mode="range"
+        defaultMonth={checkIn}
+        selected={range}
+        onSelect={onDateChange}
+        numberOfMonths={2}
+        showOutsideDays
+        fromDate={differedDate(1)}
+      />  
+    </div>
+  )
+}
 
 export default SearchBar;

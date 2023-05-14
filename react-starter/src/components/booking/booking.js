@@ -12,7 +12,6 @@ const Booking = () => {
     fetchBookings();
   }, []);
 
-
   const fetchBookings = async () => {
     try {
       const response = await axios.get('http://localhost:3001/offert/booking',{headers: {Authorization: window.localStorage.getItem('token')}});

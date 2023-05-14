@@ -35,15 +35,15 @@ export default function Login({ setToken, onError, onRegister }) {
     }).catch((e) => {
       console.error(e);
       console.log(e.response.status, e.response.data);
-      if (e.response.data.error == 'Missing username') {
+      if (e.response.data.error === 'Missing username') {
         onError("Veuillez entrée votre nom d'utilisateur");
       }
 
-      if (e.response.data.error == 'Missing password') {
+      if (e.response.data.error === 'Missing password') {
         onError("Veuillez entrée votre mot de passe");
       }
  
-      if (e.response.data.error == 'Bad password or username') {
+      if (e.response.data.error === 'Bad password or username') {
         onError("L'utilisateur n'existe pas");
       }
 

@@ -1,7 +1,5 @@
 const express = require('express');
-const crypto = require('node:crypto');
 const { ObjectId } = require('mongodb');
-
 const route = express.Router();
 
 function handler(db) {
@@ -42,8 +40,8 @@ function handler(db) {
             }
         }
 
-        const checkIn = new Date(req.body.checkIn).toDateString();
-        const checkOut = new Date(req.body.checkOut).toDateString();
+        const checkIn = new Date(req.query.checkIn).toDateString();
+        const checkOut = new Date(req.query.checkOut).toDateString();
 
         const filter = {
             guests_included: { $gte: 1 }
@@ -68,14 +66,12 @@ function handler(db) {
                 offert_id: offert._id
             });
 
-            console.log(count, offert.name, offert._id);
-
             offert.isAvailable = count < 1;
 
             return offert;
         }).toArray()
 
-        res.status(200).json(offerts.filter((offert) => offert.isAvailable));
+        res.status(200).json(offerts);
     });
 
     route.get('/booking', async (req, res) => {
@@ -148,7 +144,7 @@ function handler(db) {
 
         const opts = {}
 
-        if (req.query.reviews != 'true') {
+        if (req.query.reviews !== 'true') {
             opts.projection = {
                 'address.country': 1,
                 'address.market': 1
@@ -273,6 +269,5 @@ function handler(db) {
 
     return route;
 }
-
 
 module.exports = handler;

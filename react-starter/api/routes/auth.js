@@ -1,6 +1,5 @@
 const express = require('express');
 const crypto = require('node:crypto');
-
 const route = express.Router();
 
 function handler(db) {
@@ -64,13 +63,11 @@ function handler(db) {
             })
         }
 
-        const hash = crypto
-            .createHash('sha256');
-            
-        hash.update(req.body.password);
-            
-        const password = hash.digest('base64');
+        const hash = crypto.createHash('sha256');
 
+        hash.update(req.body.password);
+
+        const password = hash.digest('base64');
         const hashToken = crypto.createHash('sha256');
 
         hashToken.update('' + (process.pid + Date.now() + Math.random()));
@@ -96,6 +93,5 @@ function handler(db) {
 
     return route;
 }
-
 
 module.exports = handler;

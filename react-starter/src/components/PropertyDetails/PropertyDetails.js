@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams, redirect } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -10,24 +10,25 @@ import './PropertyDetails.css';
 function PropertyDetails() {
   const filters = useContext(FilterContext);
   const { propertyId } = useParams();
+  const navigate = useNavigate();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchPropertyDetails = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`http://localhost:3001/offert/${propertyId}`);
+        setProperty(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching property details:', error);
+        setLoading(false);
+      }
+    };
+
     fetchPropertyDetails();
   }, [propertyId]);
-
-  const fetchPropertyDetails = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`http://localhost:3001/offert/${propertyId}`);
-      setProperty(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching property details:', error);
-      setLoading(false);
-    }
-  };
 
   const handleClickBook = () => {
     setLoading(true);
@@ -43,7 +44,8 @@ function PropertyDetails() {
       .then((response) => {
         setLoading(false);
         if (response.data.bookId) {
-          redirect('/booking');
+          console.log('/booking');
+          navigate('/booking');
         }
       })
   }
@@ -68,8 +70,8 @@ return (
   <div className="property-details">
     <Navbar />
     <div className="property-details-content">
-      <h2 className="property-details-title">{property.title}</h2>
-      <img className="property-details-image" src={property.imageUrl} alt={property.title} />
+      <h2 className="property-details-title">{property.name}</h2>
+      <img className="property-details-image" src={property.images.picture_url} alt={property.title} />
       <p className="property-details-description">{property.description}</p>
       <p className="property-details-price">Prix: {property.price.$numberDecimal} €</p>
       <button className="property-details-book" onClick={handleClickBook}>Réserver</button>
