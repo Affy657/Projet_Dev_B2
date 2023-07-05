@@ -26,7 +26,7 @@ Pour installer et exécuter le projet, suivez les étapes ci-dessous :
 
 1. Clonez le dépôt :
 ```bash
-git clone https://github.com/Affy657/projet_dev_b2.git
+git clone https://github.com/Affy657/React_Airbnb.git
 ```
 
 2. Accédez au dossier du projet :
